@@ -34,6 +34,7 @@ def login_tg_user(request):
     if user:
         login(request, user)
     return redirect('tg_connect')
+
 # выход пользователя как телеграм пользователя
 def logout_tg_user(request):
     logout(request)
