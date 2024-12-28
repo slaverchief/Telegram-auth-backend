@@ -34,6 +34,8 @@ ALLOWED_HOSTS = ['localhost']
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    'telegram_interaction',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -71,6 +73,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'DjangoProj.wsgi.application'
+ASGI_APPLICATION = "DjangoProj.asgi.application"
 
 
 # Database
