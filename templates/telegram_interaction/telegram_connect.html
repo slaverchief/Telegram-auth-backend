@@ -8,11 +8,11 @@
 <body>
     {% if request.user.is_authenticated %}
     <div>Вы авторизованы как {{request.user.username}}</div>
-    <a href="{% url 'logout' %}"><button>Выход</button></a>
+    <a href="{% url 'tg_logout' %}"><button>Выход</button></a>
     {% else %}
 <a  target="_blank" href={{connect_url}}><button>Войти через Telegram</button></a>
 <token_block id="ctoken" hidden>{{token}}</token_block>
-<form hidden  id='tgauth_form' method="post" action="{% url 'login' %}">
+<form hidden  id='tgauth_form' method="post" action="{% url 'tg_login' %}">
 <input type="text" name="username">
 <input type="text" name="password">
 </form>

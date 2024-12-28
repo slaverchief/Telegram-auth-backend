@@ -1,6 +1,7 @@
 
 sid = document.getElementById('ctoken').innerHTML
 
+// подключения к вебсокету, sid - идентификатор сокета, он хранится в самом HTML файле с атрибутом hidden
 const sSocket = new WebSocket(
     'ws://'
     + window.location.host
@@ -19,6 +20,8 @@ sSocket.onmessage = function(e) {
         form.querySelector(`input[name="username"]`).setAttribute('value', username)
         form.querySelector(`input[name="password"]`).setAttribute('value', password)
         form.submit()
+        // при получении сообщения от вебсокета скрипт заполняет форму,
+        // которая скрыта в HTML документе и вызывает функцию submit(), отправляя данные для авторизации.
 };
 
 sSocket.onclose = function(e) {

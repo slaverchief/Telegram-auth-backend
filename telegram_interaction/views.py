@@ -13,12 +13,13 @@ from DjangoProj.settings import tg_url
 class TGConnectionView(View):
 
     def get(self, request):
-        token = secrets.token_hex(5)
+        token = secrets.token_hex(5) # генерация рандомного токена для идентификации вебсокет группы
         context = {"connect_url": f'{tg_url}?start={token}', 'token': token}
         return render(request, "telegram_interaction/telegram_connect.html", context=context)
 
     def post(self, request):
         data = json.loads(request.body)
+        # отправка сообщения об успешной авторизации вебсокету
         async_to_sync(get_channel_layer().group_send)(
             data['token'], {"type": "tg.message",
                             "message": {'username': data['user'], 'token': data['token']}
@@ -26,15 +27,16 @@ class TGConnectionView(View):
         )
         return HttpResponse()
 
+# авторизация пользователя как телеграм пользователя
 def login_tg_user(request):
     username, password = request.POST['username'], request.POST['password']
     user = tg_auth(username, password)
     if user:
         login(request, user)
-    return redirect('connect')
-
+    return redirect('tg_connect')
+# выход пользователя как телеграм пользователя
 def logout_tg_user(request):
     logout(request)
-    return redirect('connect')
+    return redirect('tg_connect')
 
 
